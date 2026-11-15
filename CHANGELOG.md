@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.3 — 2026-11-15
+
+Documentation only; no change to the host or client code.
+
+- Added **"If you want an icon on the phone's home screen"**: a `302` redirector
+  cannot back a home-screen icon (the icon stores the post-redirect URL), the
+  page must carry `apple-touch-icon` and `apple-mobile-web-app-title`, the image
+  should be 180×180, and adding the icon is a one-time action.
+- This is the trap that made the author re-copy the phone link every day; the
+  published guidance previously implied a token URL was a normal bookmark.
+
 ## 0.1.2 — 2026-11-15
 
 Documentation and release pipeline only; no change to the host or client code.

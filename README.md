@@ -91,7 +91,18 @@ Two things follow from that, and they are different:
 - The **token** in the URL is produced at every host start, so a saved token URL dies at the next start (boot, login, update, manual restart).
 - The **session cookie** the host issues after a first successful load lives for 30 days and survives host restarts, so a browser that keeps its cookies stays logged in even when the token in the bookmarked URL is long dead. A browser that does not (private window, an in-app webview, cleared site data) falls back to the `401` page.
 
-For a bookmark that never expires, publish a redirector instead of a token URL: this setup runs a tiny portal on loopback whose page carries a single button linking to the current token from `portal/url.txt` (append `?go=1` for a plain `302`), and Tailscale exposes it on its own port (`9443` here). Bookmark the portal, not the token URL — a home-screen icon is saved with the URL you land on *after* a redirect, so a redirecting entry would capture a token that dies at the next host start.
+For a bookmark that never expires, publish a redirector instead of a token URL: this setup runs a tiny portal on loopback whose page carries a single button linking to the current token from `portal/url.txt` (append `?go=1` for a plain `302`), and Tailscale exposes it on its own port (`9443` here).
+
+### If you want an icon on the phone's home screen
+
+There is a trap here worth spelling out, because it cost this project a week of daily re-copying:
+
+- **A `302` redirector cannot back a home-screen icon.** iOS and Android save the URL you land on *after* the redirect, so the icon ends up holding a token URL and breaks at the next host start. The redirector has to answer with a page that contains the link, so the icon keeps the stable address.
+- **The page must carry the icon and the label.** Without `<link rel="apple-touch-icon">` iOS screenshots the page as the icon, and without `apple-mobile-web-app-title` the label becomes the truncated `<title>`.
+- **Write the icon at 180×180.** A larger PNG still works, but iOS downscales without much care.
+- **Adding the icon is a one-time action with that page.** After that the icon always resolves to the current token, so no re-copying — that is the whole point of the stable entry.
+
+A working example is the portal in this project's author's setup: a loopback listener that reads `portal/url.txt` and serves a page with one big link plus `apple-touch-icon`, `apple-mobile-web-app-title=DSH`, `theme-color`, and `apple-mobile-web-app-capable`.
 
 ## How it works
 
