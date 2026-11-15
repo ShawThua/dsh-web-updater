@@ -1,0 +1,4 @@
+# dsh-web-updater bundle patch: host (feed check + download + detached installer) + client (settings row + sidebar dot).
+- insert:
+    - id: dsh-web-updater
+      name: 'dsh-web-updater'

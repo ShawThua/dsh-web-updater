@@ -1,0 +1,13 @@
+version: 0.2.2-rc.3
+files:
+  - url: >-
+      https://download.deepseek.com/dsh-desk/bin/win-x64/deepseek-harness-0.2.2-rc.3-win-x64.exe
+    size: 299595752
+    sha512: >-
+      GiJf8kx+C7eoiZ0xQSYBcTyh5xmXQl+vh63U6uSm963McK1AkMgB8PydzuekWdUY7hyURvhVMHANM4pn+tCKzQ==
+path: >-
+  https://download.deepseek.com/dsh-desk/bin/win-x64/deepseek-harness-0.2.2-rc.3-win-x64.exe
+sha512: >-
+  GiJf8kx+C7eoiZ0xQSYBcTyh5xmXQl+vh63U6uSm963McK1AkMgB8PydzuekWdUY7hyURvhVMHANM4pn+tCKzQ==
+stagingPercentage: 100
+releaseDate: '2026-11-13T07:31:42.937Z'

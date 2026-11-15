@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Web updater",
+    "description": "Checks the nightly update feed, downloads the installer, verifies its sha512 digest, and installs it from the web host — then restarts the host. Find it in Settings → General → Update; a dot on the collapsed sidebar shows an available update, a failure, or an install in progress. Windows only. Installing stops the host, so the page and the phone link disconnect for one to two minutes and unsent drafts are lost. Update checks, downloads, and installs only run from this machine (loopback); remote browsers can watch progress. The Phone link button returns the current launch token to any local process, which is equivalent to a login credential.",
+    "detail": "docs/DETAIL.md"
+  }
+}
