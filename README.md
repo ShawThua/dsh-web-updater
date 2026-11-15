@@ -56,6 +56,34 @@ Then open **Settings → General → Update**. The row shows the installed versi
 
 The row warns before installing because the host restarts: the page and the phone connection drop for one to two minutes, and **drafts that were never sent are lost**. Send or copy them first. (The [draft-persistence](https://github.com/ShawThua/dsh-draft-persistence) plugin covers the part that already reached the host.)
 
+## Phone and remote access
+
+The **Phone link** button exists because of one detail of `dsh web`: the host prints a new launch token on every start, so a bookmarked URL answers `401` after a restart.
+
+- `GET /web-url` (loopback only) returns `localUrl` and `phoneUrl`, both carrying the *current* token.
+- The origin of `phoneUrl` is the host's own `--public-url`, which the plugin records in `relaunch.json` when it starts. Start the host without one and the origin falls back to the `Host` header the browser sent — right for a LAN address, empty when nothing is publishing the host.
+- The host keeps listening on `127.0.0.1` only. Something else has to publish it to another device.
+
+[Tailscale](https://tailscale.com/) is the setup this plugin was written against; it is not required:
+
+```powershell
+# publish https://<machine>.<tailnet>.ts.net:8443/ -> 127.0.0.1:7979
+tailscale serve --bg --https=8443 http://127.0.0.1:7979
+
+# start the host so the button can build the phone URL
+dsh web --profile web --host 127.0.0.1 --port 7979 `
+  --public-url https://<machine>.<tailnet>.ts.net:8443 `
+  --trusted-host <machine>.<tailnet>.ts.net:8443
+```
+
+- `--public-url` is the origin the button substitutes for `127.0.0.1`.
+- `--trusted-host` is needed because the proxy forwards the tailnet name as the `Host` header; without it DSH rejects the request.
+- `serve` needs HTTPS certificates enabled for the tailnet; `tailscale serve status` shows what is actually published.
+- Any other reverse proxy or tunnel that terminates TLS and forwards to `127.0.0.1:7979` while preserving the original host works the same way.
+- A machine usually cannot reach its own tailnet address through `serve`, so use the local link on the host itself and the phone link everywhere else.
+
+**The link is a credential.** Whoever holds it, and can reach the host, is logged in. It rotates on every restart — re-copy it after an update — and it should never be pasted into a public issue, screenshot, or chat log.
+
 ## How it works
 
 ```

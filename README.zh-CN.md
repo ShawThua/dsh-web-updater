@@ -56,6 +56,34 @@
 
 安装前那一行会给出警告：宿主会重启，页面与手机连接将断开一到两分钟，**没发出去的草稿会丢**。请先发送或复制出来。（已经落到宿主的部分由 [draft-persistence](https://github.com/ShawThua/dsh-draft-persistence) 兜住。）
 
+## 手机与远程访问
+
+「手机链接」按钮的存在，只因为 `dsh web` 的一个细节：宿主每次启动都会打印新的 launch token，收藏下来的旧链接重启后一律 `401`。
+
+- `GET /web-url`（仅回环）返回 `localUrl` 与 `phoneUrl`，两者都带着**当前** token。
+- `phoneUrl` 的 origin 取自宿主自己的 `--public-url`（插件启动时记进 `relaunch.json`）。启动时没带这个参数，就退回浏览器请求的 `Host` 头——局域网地址够用，没做任何发布时则为空。
+- 宿主始终只监听 `127.0.0.1`，要让别的设备访问，得另外把它发布出去。
+
+本插件是按 [Tailscale](https://tailscale.com/) 的形态写的，但它不是必须的：
+
+```powershell
+# 把 https://<机器名>.<tailnet>.ts.net:8443/ 发布到 127.0.0.1:7979
+tailscale serve --bg --https=8443 http://127.0.0.1:7979
+
+# 这样启动宿主，按钮才拼得出手机地址
+dsh web --profile web --host 127.0.0.1 --port 7979 `
+  --public-url https://<机器名>.<tailnet>.ts.net:8443 `
+  --trusted-host <机器名>.<tailnet>.ts.net:8443
+```
+
+- `--public-url` 就是按钮替换 `127.0.0.1` 用的 origin。
+- `--trusted-host` 必须加：反代会把 tailnet 域名作为 `Host` 头转进来，不加 DSH 会拒绝这个请求。
+- `serve` 需要为 tailnet 启用 HTTPS 证书；`tailscale serve status` 能看到实际发布了什么。
+- 任何能终止 TLS、转发到 `127.0.0.1:7979` 并保留原始 Host 的反代或隧道都一样可用。
+- 本机通常连不上自己的 tailnet 地址（`serve` 只对 tailnet 对端放行），所以本机用 localUrl，别的设备用 phoneUrl。
+
+**这条链接等价于密码。** 谁拿到它、又能连到宿主，就等于登录了这份宿主。它每次重启都会变（更新完记得重新复制），也永远不要贴进公开的 issue、截图或聊天记录里。
+
 ## 工作原理
 
 ```
