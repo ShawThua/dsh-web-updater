@@ -79,7 +79,7 @@ dsh web --profile web --host 127.0.0.1 --port 7979 `
 ```
 
 - `--public-url` 就是按钮替换 `127.0.0.1` 用的 origin。
-- `--trusted-host` 必须加：反代会把 tailnet 域名作为 `Host` 头转进来，不加 DSH 会拒绝这个请求。
+- `--trusted-host` 必须加：反代会把 tailnet 域名作为 `Host` 头转进来，而 DSH 用 `Host` 给 `/api` 请求做白名单——既不是回环、也没登记的 authority 一律 `403`。首页可能照样能打开，被挡的是 API。
 - `serve` 需要为 tailnet 启用 HTTPS 证书；`tailscale serve status` 能看到实际发布了什么。
 - 任何能终止 TLS、转发到 `127.0.0.1:7979` 并保留原始 Host 的反代或隧道都一样可用。
 - 本机通常连不上自己的 tailnet 地址（`serve` 只对 tailnet 对端放行），所以本机用 localUrl，别的设备用 phoneUrl。

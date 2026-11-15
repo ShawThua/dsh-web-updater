@@ -79,7 +79,7 @@ dsh web --profile web --host 127.0.0.1 --port 7979 `
 ```
 
 - `--public-url` is the origin the button substitutes for `127.0.0.1`.
-- `--trusted-host` is needed because the proxy forwards the tailnet name as the `Host` header; without it DSH rejects the request.
+- `--trusted-host` is needed because the proxy forwards the tailnet name as the `Host` header, and DSH fences `/api` requests by `Host`: an authority that is neither loopback nor listed gets `403`. (The page itself may still load; the failing part is the API.)
 - `serve` needs HTTPS certificates enabled for the tailnet; `tailscale serve status` shows what is actually published.
 - Any other reverse proxy or tunnel that terminates TLS and forwards to `127.0.0.1:7979` while preserving the original host works the same way.
 - A machine usually cannot reach its own tailnet address through `serve`, so use the local link on the host itself and the phone link everywhere else.
