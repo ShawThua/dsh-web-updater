@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.1 — 2026-11-15
+
+Documentation and release pipeline only.
+
+- Publish through GitHub Releases with npm trusted publishing (OIDC) and provenance.
+- No runtime changes.
+
 ## 0.1.0 — 2026-11-15
 
 First public release.
@@ -27,3 +34,5 @@ First public release.
 - Verified on DSH 0.2.2-rc.3 on Windows 11: one real in-place upgrade
   (0.2.2-rc.1 → 0.2.2-rc.3) through the settings row, plus rehearsal runs of the
   stop → install → verify → restart path in an isolated host.
+
+
