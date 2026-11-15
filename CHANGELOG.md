@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.1 — 2026-11-15
+## 0.1.2 — 2026-11-15
 
 Documentation and release pipeline only; no change to the host or client code.
 
