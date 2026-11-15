@@ -1,0 +1,37 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - name: Use a recent npm (trusted publishing needs >= 11.5.1)
+        run: npm install -g npm@latest
+      - name: Tag matches package.json
+        if: github.event_name == 'release'
+        run: |
+          expected="v$(node -p "require('./package.json').version")"
+          actual="${{ github.event.release.tag_name }}"
+          if [ "$expected" != "$actual" ]; then
+            echo "tag $actual does not match package.json ($expected)" >&2
+            exit 1
+          fi
+      - name: Unit tests
+        run: npm test
+      - name: Syntax check
+        run: npm run check
+      - name: Publish with provenance
+        run: npm publish --provenance --access public
