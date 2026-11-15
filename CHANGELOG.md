@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.1.1 — 2026-11-15
+
+Documentation and release pipeline only; no change to the host or client code.
+
+- **Corrected the phone-link guidance.** The token in the URL is minted at every
+  host start, so a saved token URL dies at the next start (boot, login, update,
+  manual restart). The session cookie the host issues lasts 30 days and survives
+  restarts, so a browser that keeps its cookies stays signed in. A bookmark
+  should point at a redirector rather than at a token URL — and a phone
+  home-screen icon cannot rely on a redirector that answers with `302`, because
+  the icon is saved with the URL you land on after the redirect.
+- **Stated what `--trusted-host` actually gates.** DSH fences `/api` requests by
+  `Host`: an authority that is neither loopback nor listed answers `403`, while
+  the page itself may still load.
+- Documented the npm package name as an install source.
+- Releases now publish from GitHub Releases through npm trusted publishing
+  (OIDC) with provenance.
+
 ## 0.1.0 — 2026-11-15
 
 First public release.

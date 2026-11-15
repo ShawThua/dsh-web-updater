@@ -1,6 +1,6 @@
 {
   "name": "dsh-web-updater",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Check the DSH nightly update feed, download and sha512-verify the installer, and install it from the web GUI while restarting the web host afterwards.",
   "license": "MIT",
   "author": "ShawThua",
