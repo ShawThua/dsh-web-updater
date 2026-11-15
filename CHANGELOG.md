@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.4 — 2026-11-15
+
+Package asset only; no host or client code change.
+
+- New plugin icon: a blue rounded tile with the `DSH` wordmark, replacing the
+  download-arrow mark (the arrow read as "download" first and "updater" second).
+
 ## 0.1.3 — 2026-11-15
 
 Documentation only; no change to the host or client code.
