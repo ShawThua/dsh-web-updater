@@ -91,7 +91,7 @@ Two things follow from that, and they are different:
 - The **token** in the URL is produced at every host start, so a saved token URL dies at the next start (boot, login, update, manual restart).
 - The **session cookie** the host issues after a first successful load lives for 30 days and survives host restarts, so a browser that keeps its cookies stays logged in even when the token in the bookmarked URL is long dead. A browser that does not (private window, an in-app webview, cleared site data) falls back to the `401` page.
 
-For a bookmark that never expires, publish a redirector instead of a token URL: this setup runs a tiny portal on loopback that answers every request with `302` to `/portal/url.txt`, and Tailscale exposes it on its own port (`9443` here). Bookmark the redirector, not the token URL.
+For a bookmark that never expires, publish a redirector instead of a token URL: this setup runs a tiny portal on loopback whose page carries a single button linking to the current token from `portal/url.txt` (append `?go=1` for a plain `302`), and Tailscale exposes it on its own port (`9443` here). Bookmark the portal, not the token URL — a home-screen icon is saved with the URL you land on *after* a redirect, so a redirecting entry would capture a token that dies at the next host start.
 
 ## How it works
 
