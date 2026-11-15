@@ -1,6 +1,7 @@
 # dsh-web-updater
 
 [![CI](https://github.com/ShawThua/dsh-web-updater/actions/workflows/ci.yml/badge.svg)](https://github.com/ShawThua/dsh-web-updater/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/dsh-web-updater.svg)](https://www.npmjs.com/package/dsh-web-updater)
 
 在 **DSH 网页端**自己的界面里更新宿主：检查 nightly 更新源、下载安装包、校验、安装，最后让宿主自己起来。
 
@@ -34,6 +35,7 @@
 
 1. **从本仓库**（插件管理器、设置 → 插件，或 `plugin_manager` 工具）：
    - 仓库标识：`ShawThua/dsh-web-updater`
+   - npm 包名：`dsh-web-updater`
    - 或本地检出：`link:<检出的绝对路径>`
 2. 管理器会加依赖并选中 bundle；profile 的配置 HMR 通常立即生效（日志里有 `application: "applied"`），否则重启宿主。
 3. **确认 Host 半边活着**：

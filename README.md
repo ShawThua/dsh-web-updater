@@ -1,6 +1,7 @@
 # dsh-web-updater
 
 [![CI](https://github.com/ShawThua/dsh-web-updater/actions/workflows/ci.yml/badge.svg)](https://github.com/ShawThua/dsh-web-updater/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/dsh-web-updater.svg)](https://www.npmjs.com/package/dsh-web-updater)
 
 Update the **DSH web host** from its own web GUI: check the nightly feed, download the installer, verify it, install it — and let the host come back up by itself.
 
@@ -34,6 +35,7 @@ Install it through DSH's plugin manager — do not hand-edit the profile's `pack
 
 1. **From this repository** (plugin manager, Settings → Plugins, or the `plugin_manager` agent tool):
    - repository spec: `ShawThua/dsh-web-updater`
+   - npm package: `dsh-web-updater`
    - or a local checkout: `link:<absolute path to the checkout>`
 2. The manager adds the dependency and selects the bundle; profile configuration HMR usually applies it immediately (look for `application: "applied"`), otherwise restart the Host.
 3. **Verify** the host half is alive:
