@@ -1,6 +1,6 @@
 {
   "name": "dsh-web-updater",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Check the DSH nightly update feed, download and sha512-verify the installer, and install it from the web GUI while restarting the web host afterwards.",
   "license": "MIT",
   "author": "ShawThua",
@@ -20,6 +20,7 @@
     "locale/*.json",
     "docs",
     "icon.svg",
+    "assets",
     "README.md",
     "README.zh-CN.md",
     "LICENSE",
@@ -30,12 +31,16 @@
     "check": "node --check lib/index.js && node --check lib/client.js && node --check lib/args.js"
   },
   "keywords": [
+    "deepseek",
     "deepseek-harness",
     "dsh",
     "dsh-plugin",
     "cordis",
+    "web-ui",
     "updater",
     "update",
+    "nightly",
+    "windows",
     "installer",
     "web"
   ],

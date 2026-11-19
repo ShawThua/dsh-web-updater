@@ -31,7 +31,18 @@ This plugin moves the same job into the web GUI. Everything it needs already exi
 
 ## Install
 
-Install it through DSH's plugin manager — do not hand-edit the profile's `package.json` or `cordis.patch.yml`; the manager owns those files.
+One command, then restart the Host:
+
+```bash
+dsh plugin --profile web add dsh-web-updater
+```
+
+After the restart, **Settings → General → Update** shows the installed version and a check button. That is the whole install.
+
+<details>
+<summary>Other ways in (UI, agent tool, local checkout)</summary>
+
+Do not hand-edit the profile's `package.json` or `cordis.patch.yml`; the plugin manager owns those files.
 
 1. **From this repository** (plugin manager, Settings → Plugins, or the `plugin_manager` agent tool):
    - repository spec: `ShawThua/dsh-web-updater`
@@ -48,6 +59,8 @@ Install it through DSH's plugin manager — do not hand-edit the profile's `pack
    `started:true` means the installer script really started and bound all of its parameters, without stopping the host. The current token is printed by `dsh web` at startup.
 
 Then open **Settings → General → Update**. The row shows the installed version; **Check for updates** compares it with the feed.
+
+</details>
 
 ## Usage
 

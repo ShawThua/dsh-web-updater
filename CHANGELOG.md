@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.5 — 2026-11-19
+
+Packaging and documentation only; no host or client code change.
+
+- `package.json`: `keywords` gained `deepseek`, `web-ui`, `nightly` and `windows`;
+  `assets` is now shipped in `files`.
+- New 512×512 raster icon at `assets/icon.png`, used as the plugin-market tile.
+  `icon.svg` stays the bundle icon; the catalog only accepts raster images.
+- README (English and Chinese): the install section now opens with the single
+  `dsh plugin --profile web add …` command, and the plugin-manager route moved
+  into a collapsed block.
+
 ## 0.1.4 — 2026-11-15
 
 Package asset only; no host or client code change.

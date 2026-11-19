@@ -31,6 +31,17 @@
 
 ## 安装
 
+一条命令，然后重启宿主：
+
+```bash
+dsh plugin --profile web add dsh-web-updater
+```
+
+重启后 **设置 → 通用 → 更新** 会显示已安装版本和一个检查按钮。装完就这样。
+
+<details>
+<summary>其它装法（界面、agent 工具、本地目录）</summary>
+
 用 DSH 的插件管理器安装——不要手改 profile 的 `package.json` 或 `cordis.patch.yml`，那两个文件由管理器维护。
 
 1. **从本仓库**（插件管理器、设置 → 插件，或 `plugin_manager` 工具）：
@@ -48,6 +59,8 @@
    `started:true` 说明安装脚本真的起来了、参数全部绑定成功，且没有停宿主。当前 token 由 `dsh web` 启动时打印。
 
 然后打开 **设置 → 通用 → 更新**，那一行会显示已安装版本；点「检查更新」与更新源比较。
+
+</details>
 
 ## 用法
 
